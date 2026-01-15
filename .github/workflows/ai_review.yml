@@ -1,0 +1,79 @@
+name: AI Review (Advisory)
+
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review, labeled, synchronize]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: ai-review-${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  ai_review_claude:
+    name: AI Review (Claude)
+    # Security gates:
+    # - only run for same-repo PRs (no forks) to avoid secrets exposure
+    # - require explicit approval labels
+    if: >
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      contains(join(github.event.pull_request.labels.*.name, ','), 'ai-review') &&
+      contains(join(github.event.pull_request.labels.*.name, ','), 'external-llm-approved')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: PR-Agent (Claude) - review only
+        uses: qodo-ai/pr-agent@v0.31
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Model selection (configurable) - Using Claude Sonnet for better cost/performance
+          config.model: "anthropic/claude-sonnet-4-20250514"
+          config.fallback_models: '["anthropic/claude-3-haiku-20240307"]'
+          ANTHROPIC.KEY: ${{ secrets.ANTHROPIC_KEY }}
+          # Tool control: advisory review only (no auto-edit)
+          github_action_config.auto_review: "true"
+          github_action_config.auto_describe: "true"
+          github_action_config.auto_improve: "false"
+          # Extra instructions (tune to your project)
+          pr_reviewer.extra_instructions: >
+            Review this Java Spring Boot PR. Focus on correctness, edge cases, null-safety, error handling,
+            security (authz/authn), performance, and test adequacy. Suggest missing unit tests and risky changes.
+            Use Chinese for review comments.
+
+  # Fallback to OpenAI if Claude key is not available
+  ai_review_openai:
+    name: AI Review (OpenAI/Codex)
+    if: >
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      contains(join(github.event.pull_request.labels.*.name, ','), 'ai-review') &&
+      contains(join(github.event.pull_request.labels.*.name, ','), 'external-llm-approved')
+    runs-on: ubuntu-latest
+    # Only run if Claude job was skipped (no ANTHROPIC_KEY)
+    needs: ai_review_claude
+    if: ${{ always() && needs.ai_review_claude.result == 'skipped' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: PR-Agent (OpenAI) - review only
+        uses: qodo-ai/pr-agent@v0.31
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+          github_action_config.auto_review: "true"
+          github_action_config.auto_describe: "true"
+          github_action_config.auto_improve: "false"
+          pr_reviewer.extra_instructions: >
+            Review this Java Spring Boot PR. Focus on correctness, edge cases, null-safety, error handling,
+            security (authz/authn), performance, and test adequacy. Suggest missing unit tests and risky changes.
+            Use Chinese for review comments.
