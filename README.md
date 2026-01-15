@@ -52,7 +52,7 @@
 | ------------------------- | ------------------------------------------------- | --------------------------------- |
 | 项目名称                  | `Java_Spring_Boot`（示例 MyService）              | **可配置项**                      |
 | 仓库类型                  | 单仓                                              | 可配置项                          |
-| Java 版本                 | 17                                                | Spring Boot 3 常见；可配置项      |
+| Java 版本                 | 25                                                | Spring Boot 4 要求；可配置项      |
 | 构建工具                  | Maven                                             | 已确认                            |
 | 单元测试命令              | `mvn -B -ntp test`                                | 可配置项（如有 IT/UT 分离需调整） |
 | 覆盖率工具                | JaCoCo（XML 报告）                                | 默认；可替换                      |
@@ -680,7 +680,7 @@ comment:
 
 ## 0. Preconditions
 
-- JDK 17 (configurable)
+- JDK 25 (configurable)
 - Maven 3.8+ (recommended 3.9+)
 - Git
 - (Optional for local diff coverage) Python 3.10+
@@ -1123,7 +1123,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  JAVA_VERSION: "17"                 # configurable
+  JAVA_VERSION: "25"                 # configurable
   JACOCO_VERSION: "0.8.12"           # configurable
   PATCH_COVERAGE_MIN: "70"           # configurable (%)
   COVERAGE_XML: "target/site/jacoco/jacoco.xml"
