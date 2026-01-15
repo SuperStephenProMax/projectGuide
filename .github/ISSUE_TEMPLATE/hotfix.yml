@@ -1,0 +1,100 @@
+name: "🚨 Hotfix (紧急修复)"
+description: "线上紧急问题修复（P0/P1 级别，需要快速响应）"
+title: "[Hotfix]: "
+labels:
+  - "type: bug"
+  - "priority: P0"
+  - "status: triage"
+body:
+  - type: checkboxes
+    id: precheck
+    attributes:
+      label: "紧急确认"
+      options:
+        - label: "这是一个线上紧急问题（P0/P1），需要立即修复"
+          required: true
+        - label: "我已通知相关负责人/值班人员"
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "问题描述"
+      description: "简要描述此问题的背景和紧急性"
+      placeholder: |
+        例如：线上支付接口故障，影响用户支付流程，需要紧急修复。
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: "影响范围"
+      description: "列出可能受到影响的用户/系统/业务"
+      placeholder: |
+        - 影响用户范围：
+        - 影响功能模块：
+        - 影响时间范围：
+        - 预估损失/严重程度：
+    validations:
+      required: true
+
+  - type: textarea
+    id: root_cause
+    attributes:
+      label: "初步原因分析"
+      description: "如果已知，简述问题的根本原因"
+      placeholder: |
+        例如：用户 ID 为空时未做空值校验，导致 NullPointerException
+    validations:
+      required: false
+
+  - type: textarea
+    id: fix_plan
+    attributes:
+      label: "紧急修复方案"
+      description: "描述紧急修复的步骤和注意事项"
+      placeholder: |
+        1. 修复步骤：
+        2. 测试验证方案：
+        3. 发布计划：
+    validations:
+      required: true
+
+  - type: textarea
+    id: rollback_plan
+    attributes:
+      label: "回滚计划"
+      description: "描述如何回滚此热修复（必填）"
+      placeholder: |
+        - 回滚命令：git revert <SHA>
+        - 回滚后影响：
+        - 是否需要数据回滚：
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: "错误日志/堆栈"
+      description: "请脱敏后贴出关键日志、异常堆栈或截图"
+      render: shell
+    validations:
+      required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: "受影响版本/环境"
+      description: "例如：main@<sha> 或 v1.2.0 / 生产环境"
+      placeholder: "main@abcdef1 / production"
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: "其他说明"
+      description: "任何其他相关信息、临时绕过方案、相关链接"
+    validations:
+      required: false

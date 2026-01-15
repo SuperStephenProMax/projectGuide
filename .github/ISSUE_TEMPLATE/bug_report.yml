@@ -1,0 +1,96 @@
+name: "🐞 Bug Report"
+description: "报告一个可复现的问题（必须可追踪可回溯）"
+title: "[Bug]: "
+labels:
+  - "type: bug"
+  - "status: triage"
+body:
+  - type: checkboxes
+    id: precheck
+    attributes:
+      label: "提交前检查"
+      options:
+        - label: "我已搜索现有 Issues，确认未重复"
+          required: true
+        - label: "我可以提供复现步骤或最小复现代码"
+          required: true
+
+  - type: textarea
+    id: what_happened
+    attributes:
+      label: "现象描述"
+      description: "发生了什么？"
+      placeholder: "简要描述问题现象与影响范围"
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: "期望结果"
+      placeholder: "期望系统表现为何？"
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro_steps
+    attributes:
+      label: "复现步骤"
+      description: "请给出可复现的步骤（越具体越好）"
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: "日志/截图/堆栈"
+      description: "请脱敏后贴出关键日志、异常堆栈或截图"
+      render: shell
+    validations:
+      required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: "版本/分支/提交"
+      description: "例如：main@<sha> 或 v1.2.0"
+      placeholder: "main@abcdef1"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: "严重程度"
+      options:
+        - "P0 - 线上不可用/重大事故"
+        - "P1 - 核心功能受影响"
+        - "P2 - 次要功能受影响"
+        - "P3 - 体验/边缘问题"
+    validations:
+      required: true
+
+  - type: textarea
+    id: env
+    attributes:
+      label: "环境信息"
+      placeholder: |
+        - OS:
+        - JDK:
+        - Maven:
+        - Spring Boot:
+        - DB/中间件版本（如适用）:
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: "补充信息"
+      description: "可能的原因、临时绕过方案、相关链接"
+    validations:
+      required: false

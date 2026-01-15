@@ -1,0 +1,78 @@
+name: "🔧 Chore / 维护任务"
+description: "杂项任务：依赖更新、CI 配置、脚本维护等"
+title: "[Chore]: "
+labels:
+  - "type: chore"
+  - "status: triage"
+body:
+  - type: checkboxes
+    id: precheck
+    attributes:
+      label: "提交前检查"
+      options:
+        - label: "我已搜索现有 Issues，确认未重复"
+          required: true
+
+  - type: dropdown
+    id: chore_type
+    attributes:
+      label: "任务类型"
+      options:
+        - "依赖更新 (deps)"
+        - "CI/CD 配置 (ci)"
+        - "构建配置 (build)"
+        - "代码重构 (refactor)"
+        - "文档更新 (docs)"
+        - "测试补充 (test)"
+        - "其他 (other)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "任务描述"
+      description: "描述需要做什么"
+      placeholder: |
+        例如：
+        - 升级 Spring Boot 版本到 3.3.x
+        - 添加 Dependabot 配置
+        - 优化 CI 流水线执行时间
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: "动机/原因"
+      description: "为什么需要做这个任务？"
+      placeholder: |
+        例如：
+        - 安全漏洞修复
+        - 性能优化
+        - 技术债清理
+    validations:
+      required: false
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: "完成标准"
+      description: "如何判断任务完成"
+      placeholder: |
+        - [ ] CI 流水线正常运行
+        - [ ] 所有测试通过
+        - [ ] 文档已更新（如适用）
+    validations:
+      required: true
+
+  - type: textarea
+    id: risks
+    attributes:
+      label: "风险与注意事项"
+      placeholder: |
+        - 潜在风险：
+        - 兼容性影响：
+        - 回滚方案：
+    validations:
+      required: false

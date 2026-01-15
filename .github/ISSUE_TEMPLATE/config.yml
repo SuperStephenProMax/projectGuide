@@ -1,0 +1,12 @@
+# Issue 模板配置
+# 文档: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository
+
+blank_issues_enabled: false
+
+contact_links:
+  - name: "📖 查看贡献指南"
+    url: "https://github.com/YOUR_ORG/YOUR_REPO/blob/main/CONTRIBUTING.md"
+    about: "在创建 Issue 前，请先阅读贡献指南了解项目规范"
+  - name: "💬 讨论区"
+    url: "https://github.com/YOUR_ORG/YOUR_REPO/discussions"
+    about: "有问题想讨论？欢迎到 Discussions 交流"

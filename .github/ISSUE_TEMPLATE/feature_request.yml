@@ -1,0 +1,63 @@
+name: "✨ Feature Request"
+description: "提出需求/改进（必须有验收标准 DoD）"
+title: "[Feature]: "
+labels:
+  - "type: feature"
+  - "status: triage"
+body:
+  - type: checkboxes
+    id: precheck
+    attributes:
+      label: "提交前检查"
+      options:
+        - label: "我已搜索现有 Issues，确认未重复"
+          required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: "问题/动机"
+      description: "为什么需要这个功能？解决什么痛点？"
+      placeholder: "As a ..., I want ..., so that ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: "方案建议（可选）"
+      description: "你期望怎么做？接口/行为建议是什么？"
+    validations:
+      required: false
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: "验收标准（DoD）"
+      description: "必须可测试、可验证"
+      placeholder: |
+        - [ ] 新增/修改的行为有 UT 覆盖
+        - [ ] PR 增量覆盖率 >= 70%
+        - [ ] 文档/README 已更新（如适用）
+        - [ ] 兼容性/迁移方案明确
+    validations:
+      required: true
+
+  - type: textarea
+    id: out_of_scope
+    attributes:
+      label: "不做什么（Out of scope）"
+      placeholder: "明确本需求不包含的范围，避免范围蔓延"
+    validations:
+      required: false
+
+  - type: textarea
+    id: risks
+    attributes:
+      label: "风险与依赖"
+      placeholder: |
+        - 风险点：
+        - 依赖（外部系统/库/版本）：
+        - 性能/安全影响：
+    validations:
+      required: false
