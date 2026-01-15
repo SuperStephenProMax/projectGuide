@@ -57,9 +57,8 @@ mvn -B -ntp clean \
 
 **Override Approver (@github-handle):**
 
-## AI Review
-- [ ] Request AI review (apply label `ai-review`)
-- [ ] External LLM approved (apply label `external-llm-approved`) — required by policy
+## Copilot Code Review
+- [ ] Request Copilot review (add "Copilot" as reviewer, or comment `@github-copilot review`)
 
 ## Checklist (Developer)
 - [ ] Issue linked (Fixes/Refs)
