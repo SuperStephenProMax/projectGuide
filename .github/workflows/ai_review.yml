@@ -1,0 +1,56 @@
+# GitHub Copilot Code Review
+#
+# GitHub Copilot 代码审查是 GitHub 内置功能，无需额外的 workflow 配置。
+#
+# 启用方式：
+# 1. 仓库设置：Settings → Copilot → Code review → Enable
+# 2. 配置自动审查规则（可选）
+#
+# 使用方式：
+# - 自动：配置后 Copilot 会自动审查 PR
+# - 手动：在 PR 页面点击 "Reviewers" → 添加 "Copilot"
+# - 评论：在 PR 中 @github-copilot 请求特定审查
+#
+# 详细文档：https://docs.github.com/en/copilot/using-github-copilot/code-review/using-copilot-code-review
+
+name: Copilot Code Review (Instructions)
+
+# 此 workflow 仅用于文档说明，不执行实际操作
+# GitHub Copilot Code Review 通过仓库设置启用，而非 Actions
+
+on:
+  workflow_dispatch:
+    inputs:
+      info:
+        description: '此 workflow 仅提供配置说明'
+        required: false
+        default: 'see-comments-above'
+
+jobs:
+  info:
+    name: Copilot Code Review Setup Guide
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configuration Instructions
+        run: |
+          echo "=============================================="
+          echo "GitHub Copilot Code Review 配置指南"
+          echo "=============================================="
+          echo ""
+          echo "步骤 1: 启用 Copilot Code Review"
+          echo "  - 进入仓库 Settings → Copilot → Code review"
+          echo "  - 开启 'Enable Copilot code review'"
+          echo ""
+          echo "步骤 2: 配置自动审查（可选）"
+          echo "  - 在 Code review 设置页面"
+          echo "  - 配置 'Automatically review pull requests'"
+          echo "  - 可以设置审查范围（所有 PR / 特定文件类型等）"
+          echo ""
+          echo "步骤 3: 使用 Copilot 审查"
+          echo "  - 自动：配置后 Copilot 会自动审查新 PR"
+          echo "  - 手动：PR 页面 → Reviewers → 添加 'Copilot'"
+          echo "  - 评论：在 PR 中输入 '@github-copilot review'"
+          echo ""
+          echo "详细文档："
+          echo "https://docs.github.com/en/copilot/using-github-copilot/code-review"
+          echo "=============================================="

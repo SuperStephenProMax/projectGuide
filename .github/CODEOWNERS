@@ -1,0 +1,9 @@
+# CODEOWNERS
+# Replace @YOUR_GITHUB_HANDLE with real maintainers.
+# Docs: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+* @SuperStephenProMax
+
+# Examples (optional):
+# /src/main/java/ @YOUR_GITHUB_HANDLE
+# /.github/ @YOUR_GITHUB_HANDLE
